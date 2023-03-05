@@ -9,14 +9,21 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import lodash from 'lodash';
 
 const count = ref(0);
+const testObject = ref({});
+
 const increment = () => {
-  if (count.value !== undefined) count.value++;
+  if (count.value !== undefined && lodash.isEmpty(testObject.value)) {
+    count.value++;
+  }
 };
 
 const decrement = () => {
-  if (count.value !== undefined) count.value--;
+  if (count.value !== undefined && lodash.isEmpty(testObject.value)) {
+    count.value--;
+  }
 };
 
 const setCountTo5 = () => (count.value = 5);
