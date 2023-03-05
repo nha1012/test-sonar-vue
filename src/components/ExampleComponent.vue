@@ -14,15 +14,26 @@ import lodash from 'lodash';
 const count = ref(0);
 const testObject = ref({});
 
-const increment = () => {
+const promiseFunc = (): Promise<number> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(1);
+    }, 1000);
+  });
+};
+
+const common = async (): Promise<number> => {
+  return await promiseFunc();
+};
+const increment = async () => {
   if (count.value !== undefined && lodash.isEmpty(testObject.value)) {
-    count.value++;
+    count.value += await common();
   }
 };
 
-const decrement = () => {
+const decrement = async () => {
   if (count.value !== undefined && lodash.isEmpty(testObject.value)) {
-    count.value--;
+    count.value -= await common();
   }
 };
 
