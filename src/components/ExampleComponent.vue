@@ -11,7 +11,7 @@
 import { ref } from 'vue';
 import lodash from 'lodash';
 
-const count = ref(100);
+const count = ref();
 const testObject = ref({});
 
 const promiseFunc = (): Promise<number> => {
@@ -26,13 +26,13 @@ const common = async (): Promise<number> => {
   return await promiseFunc();
 };
 const increment = async () => {
-  if (count.value != 100 && lodash.isEmpty(testObject.value)) {
+  if (count.value === NaN && lodash.isEmpty(testObject.value)) {
     count.value += await common();
   }
 };
 
 const decrement = async () => {
-  if (count.value != 100 && lodash.isEmpty(testObject.value)) {
+  if (count.value === NaN && lodash.isEmpty(testObject.value)) {
     count.value -= await common();
   }
 };
