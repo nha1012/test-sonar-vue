@@ -1,2 +1,7 @@
-const a = 1;
-return a == 1;
+let target = -5;
+let num = 3;
+
+target = -num;
+target = +num;
+
+console.log(target);
