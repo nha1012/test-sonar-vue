@@ -1,64 +1,23 @@
 <template>
   <div>
-    <p>{{ title }}</p>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id" @click="increment">
-        {{ todo.id }} - {{ todo.content }}
-      </li>
-    </ul>
-    <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
-    <p>Active: {{ active ? 'yes' : 'no' }}</p>
-    <p>Clicks on todos: {{ clickCount }}</p>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="setCountTo5">5</button>
+    {{ count }}
   </div>
 </template>
 
-<script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  computed,
-  ref,
-  toRef,
-  Ref,
-} from 'vue';
-import { Todo, Meta } from './models';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-function useClickCount() {
-  const clickCount = ref(0);
-  function increment() {
-    clickCount.value += 1
-    return clickCount.value;
-  }
+const count = ref(0);
+const increment = () => {
+  if (count.value !== undefined) count.value++;
+};
 
-  return { clickCount, increment };
-}
+const decrement = () => {
+  if (count.value !== undefined) count.value--;
+};
 
-function useDisplayTodo(todos: Ref<Todo[]>) {
-  const todoCount = computed(() => todos.value.length);
-  return { todoCount };
-}
-
-export default defineComponent({
-  name: 'ExampleComponent',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    todos: {
-      type: Array as PropType<Todo[]>,
-      default: () => []
-    },
-    meta: {
-      type: Object as PropType<Meta>,
-      required: true
-    },
-    active: {
-      type: Boolean
-    }
-  },
-  setup (props) {
-    return { ...useClickCount(), ...useDisplayTodo(toRef(props, 'todos')) };
-  },
-});
+const setCountTo5 = () => (count.value = 5);
 </script>
