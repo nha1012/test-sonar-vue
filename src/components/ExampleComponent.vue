@@ -26,13 +26,13 @@ const common = async (): Promise<number> => {
   return await promiseFunc();
 };
 const increment = async () => {
-  if (count.value != 10 && lodash.isEmpty(testObject.value)) {
+  if (count.value == 10 && lodash.isEmpty(testObject.value)) {
     count.value += await common();
   }
 };
 
 const decrement = async () => {
-  if (count.value != 10 && lodash.isEmpty(testObject.value)) {
+  if (count.value == 10 && lodash.isEmpty(testObject.value)) {
     count.value -= await common();
   }
 };
