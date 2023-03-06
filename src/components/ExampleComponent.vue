@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="js" setup>
 import { ref } from 'vue';
 import lodash from 'lodash';
 
